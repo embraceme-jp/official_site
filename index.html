@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blessing studio | ライフコーチ・フォトコーチ</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;600&family=Playfair+Display:ital,wght@0,500;1,500&family=Zen+Maru+Gothic:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #D98C5F;       /* かろやかなテラコッタ */
+            --primary-bg: #FAF9F6;    /* 透明感のあるエクリュ */
+            --accent-green: #8DA689;  /* 透き通る若草色 */
+            --gold: #E6C27A;          /* 祝福の光（ゴールド） */
+            --text-main: #44403C;     /* 墨色ではなく深いチャコール */
+            --font-serif: 'Noto Serif JP', serif;
+            --font-round: 'Zen Maru Gothic', sans-serif;
+            --font-en: 'Playfair Display', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            font-family: var(--font-round);
+            line-height: 2;
+            overflow-x: hidden;
+        }
+
+        /* --- Header (Sticky Frost Glass) --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled {
+            background: rgba(250, 249, 246, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 1rem 5%;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+        }
+
+        .logo {
+            font-family: var(--font-en);
+            font-size: 1.6rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--text-main);
+        }
+
+        .cta-nav {
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            color: white !important;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 20px rgba(217, 140, 95, 0.2);
+            transition: 0.3s;
+        }
+
+        .cta-nav:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* --- Hero: Abstract Art Canvas --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--primary-bg);
+            overflow: hidden;
+        }
+
+        /* 抽象画を表現する背景レイヤー */
+        .hero-art-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .art-circle {
+            position: absolute;
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+
+        .circle-1 { width: 600px; height: 600px; background: var(--primary); top: -10%; left: -5%; }
+        .circle-2 { width: 500px; height: 500px; background: var(--accent-green); bottom: -10%; right: -5%; animation-delay: -5s; }
+        .circle-3 { width: 400px; height: 400px; background: var(--gold); top: 20%; right: 10%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 40px) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-content .subtitle {
+            font-family: var(--font-en);
+            font-style: italic;
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* --- Section Styling --- */
+        section { padding: 120px 10%; position: relative; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title span {
+            font-family: var(--font-en);
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title h2 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--text-main);
+        }
+
+        /* --- Service Cards --- */
+        .service-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 60px 40px;
+            border-radius: 4px; /* あえて少しシャープにして信頼感を出す */
+            border: 1px solid rgba(255,255,255,0.8);
+            transition: 0.4s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            background: #fff;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.02);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-serif);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .price {
+            display: block;
+            margin-top: 25px;
+            font-weight: bold;
+            color: var(--primary);
+            letter-spacing: 0.1em;
+        }
+
+        /* --- Voice Section (Transparent & Elegant) --- */
+        .voice-section {
+            background: linear-gradient(to bottom, #FAF9F6, #F2EFED);
+        }
+
+        .voice-item {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 40px;
+            border-left: 1px solid var(--gold);
+            background: rgba(255,255,255,0.3);
+        }
+
+        .voice-text {
+            font-size: 1rem;
+            line-height: 2.2;
+            margin-bottom: 20px;
+        }
+
+        .voice-author {
+            font-family: var(--font-serif);
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--accent-green);
+        }
+
+        /* --- Profile --- */
+        .profile-flex {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        @media (max-width: 1024px) {
+            .profile-flex { flex-direction: column; text-align: center; }
+        }
+
+        .profile-img-container {
+            flex: 0 0 400px;
+            position: relative;
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+
+        .profile-img-container::after {
+            content: '';
+            position: absolute;
+            top: 20px; left: 20px; width: 100%; height: 100%;
+            border: 1px solid var(--gold);
+            z-index: -1;
+        }
+
+        /* --- Note Grid --- */
+        .note-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) { .note-grid { grid-template-columns: 1fr; } }
+
+        .note-card {
+            background: white;
+            transition: 0.3s;
+        }
+        .note-card img { width: 100%; height: 200px; object-fit: cover; }
+        .note-body { padding: 20px; }
+
+        /* --- CTA --- */
+        .final-cta {
+            text-align: center;
+            background: white;
+            padding: 150px 10%;
+        }
+
+        .btn-large {
+            display: inline-block;
+            background: var(--text-main);
+            color: white;
+            padding: 1.5rem 4rem;
+            font-family: var(--font-serif);
+            letter-spacing: 0.2em;
+            margin-top: 40px;
+            transition: 0.4s;
+        }
+
+        .btn-large:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        footer {
+            padding: 60px 10%;
+            text-align: center;
+            background: var(--primary-bg);
+            border-top: 1px solid #eee;
+        }
+
+        .sns-icons a { margin: 0 15px; font-size: 1.2rem; color: var(--accent-green); }
+
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="logo">blessing studio</div>
+        <nav>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_ID" target="_blank" class="cta-nav">無料相談を予約する</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-art-canvas">
+            <div class="art-circle circle-1"></div>
+            <div class="art-circle circle-2"></div>
+            <div class="art-circle circle-3"></div>
+        </div>
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="2000">
+            <span class="subtitle">EYES OPEN</span>
+            <h1>目を覚ませ！<br>ありのままのあなたは美しい</h1>
+        </div>
+    </div>
+
+    <section id="concept">
+        <div class="section-title" data-aos="fade-up">
+            <span>Our Philosophy</span>
+            <h2>自分自身の「いここち良さ」を<br>祝福するということ</h2>
+        </div>
+        <div style="max-width: 700px; margin: 0 auto; text-align: center;" data-aos="fade-up">
+            <p>阿蘇の広大な草原、湧き出る地熱、澄み渡る水。<br>都会の喧騒を忘れ、五感が呼吸をはじめる瞬間、<br>私たちは「何もしなくてもいい」自分に出会います。</p>
+            <p style="margin-top: 30px;">blessing studioは、対話と撮影を通じて、<br>まだ見ぬあなた自身の美しさを引き出し、<br>新しい人生の門出をエネルギッシュに祝福する場所です。</p>
+        </div>
+    </section>
+
+    <section id="service" class="service-section">
+        <div class="section-title" data-aos="fade-up">
+            <span>Services</span>
+            <h2>提供メニュー</h2>
+        </div>
+        <div class="service-container">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>オンライン無料相談会</h3>
+                <p>30分間、あなたの現在地とこれからを丁寧にお伺いします。まずは対話から始めましょう。</p>
+                <span class="price">30min / FREE</span>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>通常フォトコーチング</h3>
+                <p>対話と撮影を組み合わせ、本人も気づいていない魅力や願いを引き出し、自己理解を深める体験。</p>
+                <span class="price">¥200,000〜</span>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>特別宿泊・WS</h3>
+                <p>阿蘇の地熱を感じながら過ごす「本当の仕事」WS。複数ロケーションでの撮影も可能です。</p>
+                <span class="price">ASK / 随時案内</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="voice" class="voice-section">
+        <div class="section-title" data-aos="fade-up">
+            <span>Voice</span>
+            <h2>お客様の喜びの声</h2>
+        </div>
+        <div class="voice-item" data-aos="fade-up">
+            <p class="voice-text">「中には自分で自分を『綺麗だなぁ』と思える写真があり、自分の幅の広さに驚いたし、それがありのままの自分であると思える感覚は新鮮だった。」</p>
+            <p class="voice-author">—— さいとうみき様（30代）</p>
+        </div>
+        <div class="voice-item" data-aos="fade-up">
+            <p class="voice-text">「プロ意識が芽生えた。仕事と言えない自分がいたけれど、これだけ本気で取り組んでいるのだからもっと世に出していこうと思えた。仕事の新たな方向性が生まれた。」</p>
+            <p class="voice-author">—— クリエイター様</p>
+        </div>
+        <div class="voice-item" data-aos="fade-up">
+            <p class="voice-text">「おみずからの愛と可能性を信じる眼差しを浴び続けて、自分を好きになる時間。想像を超えた新しい自分との出会いだった。」</p>
+            <p class="voice-author">—— 撮影利用者様</p>
+        </div>
+    </section>
+
+    <section id="profile">
+        <div class="profile-flex">
+            <div class="profile-img-container" data-aos="fade-right">
+                <img src="https://images.unsplash.com/photo-1544717297-fa154da09f5b?auto=format&fit=crop&q=80&w=1000" alt="Profile">
+            </div>
+            <div class="profile-content" data-aos="fade-left">
+                <h2 style="font-family: var(--font-serif); margin-bottom: 2rem;">人生の節目を祝福し、<br>本来の願いに火を灯す。</h2>
+                <p>ブライダルジュエリーからキャリア支援、SaaSの法人営業まで。一貫して「人の魅力や願いを引き出す仕事」に携わってきました。SmartHRでの営業育成や店舗運営での売上1位達成など、成果を出し続ける中で培ったのは、相手の可能性を誰よりも信じる「眼差し」です。</p>
+                <p style="margin-top: 20px;">現在は「フォトコーチング」を通じ、誰もが自分の歩みを自ら祝福できるよう、伴走しています。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="journal">
+        <div class="section-title">
+            <span>Journal</span>
+            <h2>日々のつづり</h2>
+        </div>
+        <div id="note-feed" class="note-grid">
+            </div>
+    </section>
+
+    <section class="final-cta" data-aos="zoom-in">
+        <h2>誰のためでもない、<br>あなたの願いのために。</h2>
+        <p style="margin-top: 20px;">愛に溢れた力強い自己肯定の旅を、ここから始めませんか。</p>
+        <a href="https://forms.gle/YOUR_GOOGLE_FORM_ID" target="_blank" class="btn-large">無料オンライン相談会へ</a>
+    </section>
+
+    <footer>
+        <div class="sns-icons">
+            <a href="https://www.instagram.com/omizuu6/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://note.com/minamo_tadayoi" target="_blank"><i class="fa-solid fa-pen-nib"></i></a>
+        </div>
+        <div class="logo" style="margin: 30px 0;">blessing studio</div>
+        <p style="font-size: 0.7rem; opacity: 0.5;">&copy; 2024 blessing studio. All blessings to your life.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1500, once: true });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // Note.com RSS Fetch
+        const noteUrl = 'https://note.com/minamo_tadayoi/rss';
+        fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(noteUrl)}`)
+            .then(res => res.json())
+            .then(data => {
+                const feed = document.getElementById('note-feed');
+                feed.innerHTML = '';
+                data.items.slice(0, 3).forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'note-card';
+                    card.innerHTML = `
+                        <a href="${item.link}" target="_blank" style="text-decoration:none; color:inherit;">
+                            <img src="${item.thumbnail || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=800'}" alt="">
+                            <div class="note-body">
+                                <h4 style="font-family:var(--font-serif); font-size:1rem; margin-bottom:10px;">${item.title}</h4>
+                                <span style="font-size:0.8rem; color:#999;">${item.pubDate.split(' ')[0]}</span>
+                            </div>
+                        </a>
+                    `;
+                    feed.appendChild(card);
+                });
+            });
+    </script>
+</body>
+</html>
