@@ -764,7 +764,7 @@
 
             /* 5. First Step（スマホ用によりコンパクトに） */
             .cta-box {
-                padding: 35px 20px; /* 縮小 */
+                padding: 45px 20px 35px; /* ラベルと見出しの被りを防ぐため上部余白を調整 */
                 border-radius: 16px;
             }
             .cta-box h3 {
@@ -774,12 +774,13 @@
             .cta-box p {
                 font-size: 0.85rem !important;
                 line-height: 1.6;
-                word-break: keep-all;
+                word-break: break-word; /* keep-allによるレイアウト崩れを修正 */
             }
             .btn {
                 padding: 0.9rem 1rem; /* スマホでボタンが横に長くなりすぎないよう調整 */
                 font-size: 0.9rem;
                 margin-top: 20px;
+                white-space: normal; /* 幅が狭い端末でのボタンテキストのはみ出しを防止 */
             }
 
             /* 6. Profileテキスト */
@@ -1104,11 +1105,11 @@
                 あなたの内側にある景色を形にします。</p>
 
                 <div style="margin-top: 1.5rem; font-size: 0.85rem; line-height: 1.8; color: #666;">
-                    米国CTI認定 CPCC<br>
-                    <span style="font-size: 0.8rem; color: #888;">（世界基準のトレーニングを受けた、国際認定プロコーチです）</span><br>
+                    米国CTI認定Certified Professional Co-Active&reg; Coach（CPCC&reg;）<br>
                     Co-Active&reg; Coaching 応用・上級コース 修了<br>
                     Co-Active Leadership&reg; Workshop 修了<br>
                     Co-Active Leadership&reg; Program 受講中<br>
+                    本当の仕事ワークショップ認定リーダー<br>
                     キャリアコンサルタント養成講座 修了
                 </div>
                 
